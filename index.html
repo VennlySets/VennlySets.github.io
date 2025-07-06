@@ -73,7 +73,12 @@
                 color: #737373 !important ;
                 background-color: #b6b6b6 !important ;
             }
-            
+            .correct{
+                stroke: green;
+            }
+            .wrong{
+                stroke: red;
+            }
             .page1 .number{
                 background-color: #FFD9E1;
                 color: #FFA8C8;
@@ -1645,10 +1650,13 @@
 
         function submitAnswer(){
             if(currentIndex>=questions.length) return;
+            const elements = document.querySelectorAll("path, .rect-clickable");
             let correctAnswer = questions[currentIndex].answer.reduce((acc,val)=> acc | val,0);
             if (selectedState === correctAnswer){
                 document.getElementById('status').innerText="ถูกต้อง";
-
+                elements.forEach(element => {
+                    element.classList.add("correct");
+                });
                 completedQuestions[currentIndex] = selectedState;
 
                 if(currentIndex+1 === highestUnlockedQuestion){
@@ -1658,6 +1666,9 @@
                 saveProgress();
 
                 setTimeout(()=>{
+                    elements.forEach(element => {
+                        element.classList.remove("correct");
+                    });
                     if(currentIndex+1 < questions.length && currentIndex+1 < highestUnlockedQuestion){
                         currentIndex++;
                         showQuestions();
@@ -1676,9 +1687,17 @@
             }
             else{
                 document.getElementById('status').innerText='ลองอีกครั้ง'
+                elements.forEach(element => {
+                    element.classList.add("wrong")
+                }
                 document.getElementById('status').classList.remove('shake');
                 void document.getElementById('status').offsetWidth;
                 document.getElementById('status').classList.add('shake');
+                setTimeOut(()=>{
+                    elements.forEach(element => {
+                        element.classList.add("wrong")
+                    }
+                },1000)
                 resetColor();
             }
 

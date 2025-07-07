@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -9,8 +9,10 @@
         <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Itim&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Itim&display=swap" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+            <!--เนื้อ footer menu หายเมื่อเปิดในโทรศัพท์-->
         <style>
             body{
                 background-color: #1e1e1e;
@@ -73,12 +75,7 @@
                 color: #737373 !important ;
                 background-color: #b6b6b6 !important ;
             }
-            .correct{
-                stroke: green;
-            }
-            .wrong{
-                stroke: red;
-            }
+            
             .page1 .number{
                 background-color: #FFD9E1;
                 color: #FFA8C8;
@@ -107,6 +104,12 @@
                 stroke-width: 1;
                 fill: white;
                 stroke: black;
+            }
+            .correct{
+                stroke: green;
+            }
+            .wrong{
+                stroke: red;
             }
             .clicked {
                 fill: #a5b375 !important;
@@ -1688,17 +1691,17 @@
             else{
                 document.getElementById('status').innerText='ลองอีกครั้ง'
                 elements.forEach(element => {
-                    element.classList.add("wrong")
-                }
+                    element.classList.add("wrong");
+                });
                 document.getElementById('status').classList.remove('shake');
                 void document.getElementById('status').offsetWidth;
                 document.getElementById('status').classList.add('shake');
-                setTimeOut(()=>{
-                    elements.forEach(element => {
-                        element.classList.add("wrong")
-                    }
-                },1000)
                 resetColor();
+                setTimeout(() =>{
+                    elements.forEach(element =>{
+                        element.classList.remove("wrong");
+                    });
+                },1000)
             }
 
         }
